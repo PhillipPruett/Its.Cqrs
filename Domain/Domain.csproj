@@ -137,6 +137,7 @@
     <Compile Include="Scheduling\CommandDelivered.cs" />
     <Compile Include="Scheduling\CommandSchedulerPipeline{T}.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="Scheduling\ICommandScheduler.cs" />
     <Compile Include="Scheduling\ICommandSchedulerPipelineInitializer.cs" />
     <Compile Include="Scheduling\ICommandScheduler{T}.cs" />
     <Compile Include="Scheduling\ISpecifySchedulingBehavior.cs" />
