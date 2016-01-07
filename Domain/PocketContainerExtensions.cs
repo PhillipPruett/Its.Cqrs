@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
 using System.Linq;
 using Pocket;
 
@@ -12,14 +13,19 @@ namespace Microsoft.Its.Domain
         {
             return container.AddStrategy(type =>
             {
-                if (type.IsInterface &&  
-                    type.IsGenericType && 
-                    type.GetGenericTypeDefinition() == typeof(ICommandScheduler<>))
+                if (type.IsInterface)
                 {
-                    var aggregateType = type.GetGenericArguments().First();
-                    var schedulerType = typeof (CommandScheduler<>).MakeGenericType(aggregateType);
+                    if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICommandScheduler<>))
+                    {
+                        var aggregateType = type.GetGenericArguments().First();
+                        var schedulerType = typeof(CommandScheduler<>).MakeGenericType(aggregateType);
 
-                    return c => c.Resolve(schedulerType);
+                        return c => c.Resolve(schedulerType);
+                    }
+                    if (type == typeof(ICommandScheduler))
+                    {
+                        return c => c.Resolve(typeof(CommandScheduler));
+                    }
                 }
 
                 return null;

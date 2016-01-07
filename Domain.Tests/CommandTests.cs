@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Its.Domain.Testing;
+using Microsoft.Its.Recipes;
 using NUnit.Framework;
 
 namespace Microsoft.Its.Domain.Tests
@@ -12,7 +14,6 @@ namespace Microsoft.Its.Domain.Tests
         public async Task a_command_can_be_applied_without_specifying_an_aggregate()
         {
             var command = new DoTheNeedful();
-
             await Configuration.Current.CommandScheduler().Schedule(command);
 
             throw new NotImplementedException("Test Not Finished");
