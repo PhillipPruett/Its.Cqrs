@@ -22,5 +22,6 @@ namespace Microsoft.Its.Domain
         CommandPrecondition DeliveryPrecondition { get; }
 
         ScheduledCommandResult Result { get; set; }
+        Command Command { get; set; }
     }
 }

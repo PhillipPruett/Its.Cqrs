@@ -135,6 +135,7 @@
     <Compile Include="ICommandPreconditionVerifier.cs" />
     <Compile Include="IEventMigratingAggregate.cs" />
     <Compile Include="Scheduling\CommandDelivered.cs" />
+    <Compile Include="Scheduling\CommandScheduler.cs" />
     <Compile Include="Scheduling\CommandSchedulerPipeline{T}.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Scheduling\ICommandScheduler.cs" />

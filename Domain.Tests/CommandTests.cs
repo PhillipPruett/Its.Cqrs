@@ -10,11 +10,14 @@ namespace Microsoft.Its.Domain.Tests
     [TestFixture]
     public class CommandTests
     {
+        private ICommandScheduler commandScheduler;
+
         [Test]
         public async Task a_command_can_be_applied_without_specifying_an_aggregate()
         {
             var command = new DoTheNeedful();
-            await Configuration.Current.CommandScheduler().Schedule(command);
+            commandScheduler = Configuration.Current.CommandScheduler();
+            await commandScheduler.Schedule(command);
 
             throw new NotImplementedException("Test Not Finished");
         }

@@ -24,7 +24,7 @@ namespace Microsoft.Its.Domain
                     }
                     if (type == typeof(ICommandScheduler))
                     {
-                        return c => c.Resolve(typeof(CommandSchedulerUtilities));
+                        return c => c.Resolve(typeof(CommandScheduler));
                     }
                 }
 
