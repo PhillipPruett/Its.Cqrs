@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Microsoft.Its.Domain.Tests
@@ -13,6 +15,7 @@ namespace Microsoft.Its.Domain.Tests
 
             await Configuration.Current.CommandScheduler().Schedule(command);
 
+            throw new NotImplementedException("Test Not Finished");
         }
 
     }

@@ -706,7 +706,7 @@ namespace Microsoft.Its.Domain.Sql.Tests
 
             await orderRepository.Save(order);
 
-            Func<IQueryable<ScheduledCommand>, IQueryable<ScheduledCommand>> query = cmds =>
+            Func<IQueryable<CommandScheduler.ScheduledCommand>, IQueryable<CommandScheduler.ScheduledCommand>> query = cmds =>
                 cmds.Where(cmd => cmd.AggregateId == order.Id)
                     .Where(cmd => cmd.AppliedTime == null &&
                                   cmd.FinalAttemptTime == null);

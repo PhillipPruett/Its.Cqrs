@@ -149,6 +149,7 @@
     <Compile Include="Scheduling\ICommandSchedulerActivity.cs" />
     <Compile Include="Scheduling\CommandScheduled.cs" />
     <Compile Include="Scheduling\PreconditionNotMetException.cs" />
+    <Compile Include="Scheduling\ScheduledCommand.cs" />
     <Compile Include="Scheduling\ScheduledCommandExtensions.cs" />
     <Compile Include="Scheduling\ScheduledCommandInterceptor{T}.cs" />
     <Compile Include="Scheduling\CommandSchedulerPipelineInitializer.cs" />

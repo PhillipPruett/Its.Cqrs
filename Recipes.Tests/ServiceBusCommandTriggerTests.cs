@@ -23,6 +23,7 @@ using NUnit.Framework;
 using Sample.Domain.Ordering;
 using Sample.Domain.Ordering.Commands;
 using Clock = Microsoft.Its.Domain.Clock;
+using ScheduledCommand = Microsoft.Its.Domain.Sql.CommandScheduler.ScheduledCommand;
 
 namespace Microsoft.Its.Cqrs.Recipes.Tests
 {

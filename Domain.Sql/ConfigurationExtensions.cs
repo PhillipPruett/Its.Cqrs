@@ -141,7 +141,7 @@ namespace Microsoft.Its.Domain.Sql
 
         private static async Task DeserializeAndDeliver(
             CommandSchedulerResolver schedulerResolver,
-            ScheduledCommand serializedCommand,
+            CommandScheduler.ScheduledCommand serializedCommand,
             CommandSchedulerDbContext db)
         {
             dynamic scheduler = schedulerResolver.ResolveSchedulerForAggregateTypeNamed(serializedCommand.AggregateType);
@@ -157,7 +157,7 @@ namespace Microsoft.Its.Domain.Sql
         
         public static async Task DeserializeAndDeliver(
             this Configuration configuration,
-            ScheduledCommand serializedCommand,
+            CommandScheduler.ScheduledCommand serializedCommand,
             CommandSchedulerDbContext db)
         {
             var resolver = configuration.Container.Resolve<CommandSchedulerResolver>();

@@ -22,7 +22,7 @@ namespace Microsoft.Its.Domain
     {
         public CommandScheduled()
         {
-            ETag = Guid.NewGuid().ToString("N");
+            ETag = Guid.NewGuid().ToString("N").ToETag();
         }
 
         [JsonConverter(typeof (CommandConverter))]

@@ -144,6 +144,57 @@ namespace Microsoft.Its.Domain
             return scheduledCommand;
         }
 
+        internal static IScheduledCommand CreateScheduledCommand<TCommand>(
+            TCommand command,
+            DateTimeOffset? dueTime,
+            IEvent deliveryDependsOn = null)
+            where TCommand : ICommand
+        {
+            CommandPrecondition precondition = null;
+
+            if (deliveryDependsOn != null)
+            {
+                if (deliveryDependsOn.AggregateId == Guid.Empty)
+                {
+                    throw new ArgumentException("An AggregateId must be set on the event on which the scheduled command depends.");
+                }
+
+                if (String.IsNullOrWhiteSpace(deliveryDependsOn.ETag))
+                {
+                    deliveryDependsOn.IfTypeIs<Event>()
+                                     .ThenDo(e => e.ETag = Guid.NewGuid().ToString("N"))
+                                     .ElseDo(() =>
+                                             {
+                                                 throw new ArgumentException("An ETag must be set on the event on which the scheduled command depends.");
+                                             });
+                }
+
+                precondition = new CommandPrecondition
+                               {
+                                   AggregateId = deliveryDependsOn.AggregateId,
+                                   ETag = deliveryDependsOn.ETag
+                               };
+            }
+
+            if (String.IsNullOrEmpty(command.ETag))
+            {
+                command.IfTypeIs<Command>()
+                       .ThenDo(c => c.ETag = CommandContext.Current
+                                                           .IfNotNull()
+                                                           .Then(ctx => ctx.NextETag(""))
+                                                           .Else(() => Guid.NewGuid().ToString("N")));
+            }
+
+            var scheduledCommand = new ScheduledCommand
+                                   {
+                                       Command = command,
+                                       DueTime = dueTime,
+                                       SequenceNumber = -DateTimeOffset.UtcNow.Ticks,
+                                       DeliveryPrecondition = precondition
+                                   };
+            return scheduledCommand;
+        }
+
         public static async Task<IScheduledCommand<TAggregate>> Schedule<TCommand, TAggregate>(
             this ICommandScheduler<TAggregate> scheduler,
             Guid aggregateId,
@@ -160,6 +211,23 @@ namespace Microsoft.Its.Domain
 
             var scheduledCommand = CreateScheduledCommand<TCommand, TAggregate>(
                 aggregateId,
+                command,
+                dueTime,
+                deliveryDependsOn);
+
+            await scheduler.Schedule(scheduledCommand);
+
+            return scheduledCommand;
+        }
+
+        public static async Task<IScheduledCommand> Schedule<TCommand>(
+            this ICommandScheduler scheduler,
+            TCommand command,
+            DateTimeOffset? dueTime = null,
+            IEvent deliveryDependsOn = null)
+            where TCommand : ICommand
+        {
+            var scheduledCommand = CreateScheduledCommand<TCommand>(
                 command,
                 dueTime,
                 deliveryDependsOn);
