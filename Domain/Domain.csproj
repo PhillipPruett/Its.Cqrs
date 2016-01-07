@@ -130,6 +130,7 @@
     <Compile Include="Hash.cs" />
     <Compile Include="IClock.cs" />
     <Compile Include="EventHandling\Projector.cs" />
+    <Compile Include="ICommandHandler.cs" />
     <Compile Include="ICommandHandler{TAggregate,TCommand}.cs" />
     <Compile Include="ICommandPreconditionVerifier.cs" />
     <Compile Include="IEventMigratingAggregate.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Scheduling\CommandSchedulerPipeline{T}.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Scheduling\ICommandSchedulerPipelineInitializer.cs" />
+    <Compile Include="Scheduling\ICommandScheduler.cs" />
     <Compile Include="Scheduling\ISpecifySchedulingBehavior.cs" />
     <Compile Include="Scheduling\NoCommandPreconditionVerifications.cs" />
     <Compile Include="Reservations\ISynchronousReservationService.cs" />
@@ -183,7 +185,6 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="Reservations\IReservationService.cs" />
     <Compile Include="Scheduling\EventSourcedRepositoryExtensions.cs" />
-    <Compile Include="Scheduling\ICommandScheduler.cs" />
     <Compile Include="Scheduling\IScheduledCommand.cs" />
     <Compile Include="Scheduling\ScheduledCommandException.cs" />
     <Compile Include="Scheduling\CommandFailed.cs" />

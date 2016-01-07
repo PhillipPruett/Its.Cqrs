@@ -32,6 +32,14 @@ namespace Microsoft.Its.Domain
         }
 
         /// <summary>
+        /// Gets an <see cref="ICommandScheduler{TAggregate}" />.
+        /// </summary>
+        public static ICommandScheduler CommandScheduler(this Configuration configuration)
+        {
+            return configuration.Container.Resolve<ICommandScheduler>();
+        }
+
+        /// <summary>
         /// Configures the domain to use the specified event bus.
         /// </summary>
         public static Configuration UseEventBus(
