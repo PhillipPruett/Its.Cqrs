@@ -67,7 +67,7 @@ namespace Microsoft.Its.Domain.Testing
                         command.DueTime ?? Clock.Now().AddTicks(1),
                         (s, c) =>
                         {
-                            Domain.CommandScheduler.DeliverImmediatelyOnConfiguredScheduler(c, configuration).Wait();
+                            Domain.CommandSchedulerUtilities.DeliverImmediatelyOnConfiguredScheduler(c, configuration).Wait();
                             return Disposable.Empty;
                         });
 

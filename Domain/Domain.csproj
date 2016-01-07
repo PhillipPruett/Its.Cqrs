@@ -144,7 +144,7 @@
     <Compile Include="Scheduling\NoCommandPreconditionVerifications.cs" />
     <Compile Include="Reservations\ISynchronousReservationService.cs" />
     <Compile Include="Scheduling\AnonymousCommandScheduler{T}.cs" />
-    <Compile Include="Scheduling\CommandScheduler.cs" />
+    <Compile Include="Scheduling\CommandSchedulerUtilities.cs" />
     <Compile Include="Scheduling\CommandScheduler{T}.cs" />
     <Compile Include="Scheduling\ICommandSchedulerActivity.cs" />
     <Compile Include="Scheduling\CommandScheduled.cs" />

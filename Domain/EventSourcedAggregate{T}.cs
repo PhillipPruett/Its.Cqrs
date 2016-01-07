@@ -102,7 +102,7 @@ namespace Microsoft.Its.Domain
                 throw new ArgumentNullException("command");
             }
 
-            var scheduled = (CommandScheduled<T>) CommandScheduler.CreateScheduledCommand<TCommand, T>(
+            var scheduled = (CommandScheduled<T>) CommandSchedulerUtilities.CreateScheduledCommand<TCommand, T>(
                 Id,
                 command,
                 due);

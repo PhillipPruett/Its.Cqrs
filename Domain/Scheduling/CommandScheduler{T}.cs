@@ -44,7 +44,7 @@ namespace Microsoft.Its.Domain
             {
                 if (!await VerifyPrecondition(scheduledCommand))
                 {
-                    CommandScheduler.DeliverIfPreconditionIsSatisfiedSoon(
+                    CommandSchedulerUtilities.DeliverIfPreconditionIsSatisfiedSoon(
                         scheduledCommand,
                         Configuration.Current);
                 }
