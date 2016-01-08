@@ -20,14 +20,14 @@ namespace Microsoft.Its.Domain
         /// <summary>
         ///     Applies a command to an aggregate.
         /// </summary>
-        /// <typeparam name="TAggregate">The type of the aggregate.</typeparam>
-        /// <param name="aggregate">The aggregate.</param>
+        /// <typeparam name="TTarget">The type of the target.</typeparam>
+        /// <param name="aggregate">The target.</param>
         /// <param name="command">The command.</param>
-        /// <returns>The same aggregate with the command applied and any applicable updates performed.</returns>
-        public static TAggregate Apply<TAggregate>(
-            this TAggregate aggregate,
-            ICommand<TAggregate> command)
-            where TAggregate : class
+        /// <returns>The same target with the command applied and any applicable updates performed.</returns>
+        public static TTarget Apply<TTarget>(
+            this TTarget aggregate,
+            ICommand<TTarget> command)
+            where TTarget : class
         {
             command.ApplyTo(aggregate);
             return aggregate;
@@ -36,14 +36,14 @@ namespace Microsoft.Its.Domain
         /// <summary>
         ///     Applies a command to an aggregate.
         /// </summary>
-        /// <typeparam name="TAggregate">The type of the aggregate.</typeparam>
-        /// <param name="aggregate">The aggregate.</param>
+        /// <typeparam name="TTarget">The type of the target.</typeparam>
+        /// <param name="aggregate">The target.</param>
         /// <param name="command">The command.</param>
-        /// <returns>The same aggregate with the command applied and any applicable updates performed.</returns>
-        public static async Task<TAggregate> ApplyAsync<TAggregate>(
-            this TAggregate aggregate,
-            ICommand<TAggregate> command)
-            where TAggregate : class
+        /// <returns>The same target with the command applied and any applicable updates performed.</returns>
+        public static async Task<TTarget> ApplyAsync<TTarget>(
+            this TTarget aggregate,
+            ICommand<TTarget> command)
+            where TTarget : class
         {
             await command.ApplyToAsync(aggregate);
             return aggregate;
