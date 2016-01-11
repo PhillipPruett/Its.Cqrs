@@ -40,8 +40,6 @@ namespace Microsoft.Its.Domain
                         var applierType = typeof (EventSourcedCommandApplier<>).MakeGenericType(targetType);
                         return c => c.Resolve(applierType);
                     }
-
-                    return c => c.Resolve(typeof(CommandApplier<>).MakeGenericType(targetType));
                 }
 
                 return null;

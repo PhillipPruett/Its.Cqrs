@@ -21,17 +21,16 @@ namespace Microsoft.Its.Domain.Tests
         }
 
         [Test]
-        public void non_event_sourced_command_schedulers_can_be_resolved()
+        public async Task the_command_scheduler_can_be_used_to_deliver_commands()
         {
-            Action getScheduler = () => Configuration.Current.CommandScheduler<Target>();
+            var scheduler = Configuration.Current.CommandScheduler<Target>();
 
-            getScheduler.ShouldNotThrow();
-        }
-
-        [Test]
-        public void the_command_scheduler_can_be_used_to_deliver_commands()
-        {
-            Configuration.Current.CommandScheduler<Target>().Apply(new CommandOnTarget());
+            //await scheduler.Schedule(new CommandScheduled<Target>
+            //{
+            //    Command = new CommandOnTarget(),
+            //    DueTime = Clock.Now().AddHours(1)
+            //});
+            throw new NotImplementedException("Test Not Finished");
         }
 
         [Test]
