@@ -28,9 +28,15 @@ namespace Microsoft.Its.Domain.Api.Tests
         private static object workaround = typeof (OrderApiController);
 
         [TestFixtureSetUp]
-        public void TestFixtureSetUp()
+        public void Init()
         {
-            TestSetUp.InitializeEventStore();
+            EventStoreDbContext.NameOrConnectionString =
+                @"Data Source=(localdb)\MSSQLLocalDB; Integrated Security=True; MultipleActiveResultSets=False; Initial Catalog=ItsCqrsTestsEventStore";
+
+            using (var eventStore = new EventStoreDbContext())
+            {
+                new EventStoreDatabaseInitializer<EventStoreDbContext>().InitializeDatabase(eventStore);
+            }
         }
 
         [SetUp]

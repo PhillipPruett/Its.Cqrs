@@ -41,8 +41,7 @@ namespace Microsoft.Its.Domain
                         return c => c.Resolve(applierType);
                     }
 
-                    var schedulerType = typeof(CommandApplier<>).MakeGenericType(targetType);
-                    return c => c.Resolve(schedulerType);
+                    return c => c.Resolve(typeof(CommandApplier<>).MakeGenericType(targetType));
                 }
 
                 return null;
