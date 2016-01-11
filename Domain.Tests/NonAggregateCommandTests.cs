@@ -74,13 +74,6 @@ namespace Microsoft.Its.Domain.Tests
         }
 
         [Test]
-        public void commands_can_have_delivery_based_on_preconditions()
-        {
-
-            throw new NotImplementedException("Test Not Finished");
-        }
-
-        [Test]
         public void command_delivery_precondition_requirements_are_required_to_be_met_for_delivery()
         {
             throw new NotImplementedException("Test Not Finished");
