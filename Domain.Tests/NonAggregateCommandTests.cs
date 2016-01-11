@@ -29,6 +29,12 @@ namespace Microsoft.Its.Domain.Tests
         }
 
         [Test]
+        public void the_command_scheduler_can_be_used_to_deliver_commands()
+        {
+            Configuration.Current.CommandScheduler<Target>().Apply(new CommandOnTarget());
+        }
+
+        [Test]
         public async Task when_a_command_is_applied_directly_the_command_is_executed()
         {
             await new CommandOnTarget { }.ApplyToAsync(new Target());
@@ -56,21 +62,17 @@ namespace Microsoft.Its.Domain.Tests
         [Test]
         public void command_validations_are_checked()
         {
-            Action applyCommand = () => new CommandOnTarget { FailCommandValidation = true }.ApplyToAsync(new Target());
+            Action applyCommand = () => (new CommandOnTarget { FailCommandValidation = true }.ApplyToAsync(new Target())).Wait();
 
             applyCommand.ShouldThrow<CommandValidationException>();
-
-            throw new NotImplementedException("Test Not Finished");
         }
 
         [Test]
         public void target_validations_are_checked()
         {
-            Action applyCommand = () => new CommandOnTarget { }.ApplyToAsync(new Target(){ FailCommandApplications = true});
+            Action applyCommand = () => (new CommandOnTarget { }.ApplyToAsync(new Target(){ FailCommandApplications = true})).Wait();
 
             applyCommand.ShouldThrow<CommandValidationException>();
-
-            throw new NotImplementedException("Test Not Finished");
         }
 
         [Test]

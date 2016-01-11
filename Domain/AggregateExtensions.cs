@@ -21,32 +21,32 @@ namespace Microsoft.Its.Domain
         ///     Applies a command to an aggregate.
         /// </summary>
         /// <typeparam name="TTarget">The type of the target.</typeparam>
-        /// <param name="aggregate">The target.</param>
+        /// <param name="target">The target.</param>
         /// <param name="command">The command.</param>
         /// <returns>The same target with the command applied and any applicable updates performed.</returns>
         public static TTarget Apply<TTarget>(
-            this TTarget aggregate,
+            this TTarget target,
             ICommand<TTarget> command)
             where TTarget : class
         {
-            command.ApplyTo(aggregate);
-            return aggregate;
+            command.ApplyTo(target);
+            return target;
         }
 
         /// <summary>
         ///     Applies a command to an aggregate.
         /// </summary>
         /// <typeparam name="TTarget">The type of the target.</typeparam>
-        /// <param name="aggregate">The target.</param>
+        /// <param name="target">The target.</param>
         /// <param name="command">The command.</param>
         /// <returns>The same target with the command applied and any applicable updates performed.</returns>
         public static async Task<TTarget> ApplyAsync<TTarget>(
-            this TTarget aggregate,
+            this TTarget target,
             ICommand<TTarget> command)
             where TTarget : class
         {
-            await command.ApplyToAsync(aggregate);
-            return aggregate;
+            await command.ApplyToAsync(target);
+            return target;
         }
 
         /// <summary>
