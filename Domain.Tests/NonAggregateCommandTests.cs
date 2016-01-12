@@ -21,19 +21,6 @@ namespace Microsoft.Its.Domain.Tests
         }
 
         [Test]
-        public async Task the_command_scheduler_can_be_used_to_deliver_commands()
-        {
-            var scheduler = Configuration.Current.CommandScheduler<Target>();
-
-            //await scheduler.Schedule(new CommandScheduled<Target>
-            //{
-            //    Command = new CommandOnTarget(),
-            //    DueTime = Clock.Now().AddHours(1)
-            //});
-            throw new NotImplementedException("Test Not Finished");
-        }
-
-        [Test]
         public async Task when_a_command_is_applied_directly_the_command_is_executed()
         {
             await new CommandOnTarget { }.ApplyToAsync(new Target());
@@ -45,17 +32,6 @@ namespace Microsoft.Its.Domain.Tests
         {
             await new CommandOnTarget { ETag = Any.Guid().ToString() }.ApplyToAsync(new Target());
             CallCount.Should().Be(1);
-        }
-
-        [Test]
-        public async Task commands_are_idempotent()
-        {
-            var eTag = Any.Guid().ToString();
-            await new CommandOnTarget { ETag = eTag }.ApplyToAsync(new Target());
-            await new CommandOnTarget { ETag = eTag }.ApplyToAsync(new Target());
-            CallCount.Should().Be(1);
-
-            throw new NotImplementedException("Test Not Finished");
         }
 
         [Test]
@@ -72,12 +48,6 @@ namespace Microsoft.Its.Domain.Tests
             Action applyCommand = () => (new CommandOnTarget { }.ApplyToAsync(new Target(){ FailCommandApplications = true})).Wait();
 
             applyCommand.ShouldThrow<CommandValidationException>();
-        }
-
-        [Test]
-        public void command_delivery_precondition_requirements_are_required_to_be_met_for_delivery()
-        {
-            throw new NotImplementedException("Test Not Finished");
         }
 
     }

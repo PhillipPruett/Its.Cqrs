@@ -177,11 +177,19 @@ namespace Microsoft.Its.Domain
 
         protected virtual void HandleCommandValidationFailure(TTarget target, ValidationReport validationReport)
         {
-            throw new CommandValidationException(
-                string.Format("Validation error while applying {0} to a {1}.",
-                              CommandName,
-                              target.GetType().Name),
-                validationReport);
+            if (target is IEventSourced)
+            {
+                ((dynamic) target).HandleCommandValidationFailure((dynamic) this,
+                                                                     validationReport);
+            }
+            else
+            {
+                throw new CommandValidationException(
+                    string.Format("Validation error while applying {0} to a {1}.",
+                                  CommandName,
+                                  target.GetType().Name),
+                    validationReport);
+            }
         }
 
         internal dynamic Handler
